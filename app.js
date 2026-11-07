@@ -62,7 +62,7 @@
       { l: "Best total", v: pb ? fmt(pb.v) : "–", s: pb ? pb.c.short || pb.c.name : "" },
       { l: "ISU best", v: isuPb ? fmt(isuPb.v) : "–", s: isuPb ? isuPb.c.short || isuPb.c.name : "" },
       { l: "Swiss titles", v: titles, s: "junior champions" },
-    ].map(x => `<div class="stat"><div class="l">${x.l}</div><div class="v">${x.v}</div><div class="s">${esc(x.s)}</div></div>`).join("");
+    ].map(x => `<div class="stat"><div class="l">${x.l}</div><div class="v">${x.v}</div><div class="s" data-full="${esc(x.s)}">${esc(x.s)}</div></div>`).join("");
   }
 
   /* ---------- Filters ---------- */
@@ -119,9 +119,10 @@
     }
     list.forEach((c, i) => {
       const lbl = (c.short || c.name).replace(/\s+20\d\d$/, "").replace(/Swiss Junior Championships/, "Swiss Champs");
-      const t = esc(lbl.length > 18 ? lbl.slice(0, 17) + "…" : lbl), pl = c.place ? ord(c.place) : "";
-      if (n > 8) g += `<text transform="translate(${x(i) + 4},${H - m.b + 16}) rotate(-35)" text-anchor="end">${t}<tspan class="lbl" dx="5" style="font-size:11px">${pl}</tspan></text>`;
-      else g += `<text x="${x(i)}" y="${H - m.b + 20}" text-anchor="middle">${t}</text><text x="${x(i)}" y="${H - m.b + 36}" text-anchor="middle" style="font-size:11px">${pl}</text>`;
+      const cut = lbl.length > 18, t = esc(cut ? lbl.slice(0, 17) + "…" : lbl), pl = c.place ? ord(c.place) : "";
+      const full = cut ? ` data-full="${esc(c.name)}" class="cut"` : "";
+      if (n > 8) g += `<text${full} transform="translate(${x(i) + 4},${H - m.b + 16}) rotate(-35)" text-anchor="end">${t}<tspan class="lbl" dx="5" style="font-size:11px">${pl}</tspan></text>`;
+      else g += `<text${full} x="${x(i)}" y="${H - m.b + 20}" text-anchor="middle">${t}</text><text x="${x(i)}" y="${H - m.b + 36}" text-anchor="middle" style="font-size:11px">${pl}</text>`;
     });
     const surface = cssVar("--surface-1");
     for (const s of series) {
@@ -309,11 +310,30 @@
     };
   }
 
+  /* Show full text on hover/focus/tap wherever text is cut off */
+  function initTruncTips() {
+    const tip = $("tooltip");
+    const isCut = (el) => el instanceof SVGElement ? el.classList.contains("cut") : el.scrollWidth > el.clientWidth + 1;
+    const show = (el) => {
+      tip.innerHTML = `<div class="t" style="margin:0">${esc(el.dataset.full)}</div>`;
+      tip.hidden = false;
+      const r = el.getBoundingClientRect();
+      const left = Math.max(8, Math.min(window.innerWidth - tip.offsetWidth - 8, r.left + r.width / 2 - tip.offsetWidth / 2));
+      const top = r.top - tip.offsetHeight - 8 < 8 ? r.bottom + 8 : r.top - tip.offsetHeight - 8;
+      tip.style.left = left + "px"; tip.style.top = top + "px";
+    };
+    const handler = (e) => { const el = e.target.closest?.("[data-full]"); if (el && isCut(el)) show(el); };
+    document.addEventListener("mouseover", handler);
+    document.addEventListener("click", handler);
+    document.addEventListener("mouseout", (e) => { if (e.target.closest?.("[data-full]")) tip.hidden = true; });
+    addEventListener("scroll", () => { if (!tip.querySelector(".r")) tip.hidden = true; }, { passive: true });
+  }
+
   function init(data) {
     const comps = data.competitions.map(norm).sort((a, b) => (a.start || "").localeCompare(b.start || ""));
     DATA = { ...data, competitions: comps, seasons: [...new Set(comps.map(c => c.season))] };
     $("updated").textContent = `Last updated ${dfmt(data.updated)}.`;
-    initTheme(); renderStats(); renderProfile();
+    initTheme(); initTruncTips(); renderStats(); renderProfile();
     $("viewToggle").onclick = (e) => { const b = e.target.closest("button"); if (!b) return; state.view = b.dataset.view;
       [...$("viewToggle").children].forEach(x => x.classList.toggle("on", x === b)); renderList(); };
     $("videoClose").onclick = closeVideo;

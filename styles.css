@@ -286,3 +286,7 @@ table.res tr:hover td { background: var(--surface-2); }
 .igav { width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center; color: #fff; background: linear-gradient(45deg, #f09433, #dc2743 50%, #bc1888); }
 .igav svg { width: 16px; height: 16px; }
 .igpost .go { color: var(--text-muted); }
+
+/* Truncated text: show full text on hover */
+[data-full] { cursor: default; }
+.chart text.cut { cursor: help; }
