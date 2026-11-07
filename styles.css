@@ -290,3 +290,16 @@ table.res tr:hover td { background: var(--surface-2); }
 /* Truncated text: show full text on hover */
 [data-full] { cursor: default; }
 .chart text.cut { cursor: help; }
+
+/* Couple switcher */
+.hero-top { gap: 12px; flex-wrap: wrap; }
+.teams { display: inline-flex; gap: 4px; margin-left: auto; padding: 3px; border-radius: 999px; background: rgba(255,255,255,.06); border: 1px solid rgba(217,221,227,.18); }
+.teams a { color: #d6cfd6; text-decoration: none; font-size: .8rem; font-weight: 600; padding: 5px 12px; border-radius: 999px; }
+.teams a:hover { color: #fff; background: rgba(255,255,255,.08); }
+.teams a[aria-current="page"] { color: #fff; background: var(--crimson); }
+
+/* Level + RD-only */
+.seg[hidden] { display: none; }
+.pill.lvl-senior { background: color-mix(in oklab, var(--crimson) 16%, var(--surface-1)); color: var(--text-primary); border-color: transparent; }
+.pill.lvl-junior { background: color-mix(in oklab, var(--series-1) 14%, var(--surface-1)); color: var(--text-primary); border-color: transparent; }
+.total .rdonly { font-size: .72rem; color: var(--text-muted); margin-top: 2px; }

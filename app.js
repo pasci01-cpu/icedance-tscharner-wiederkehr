@@ -23,8 +23,9 @@
   const cssVar = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
   const $ = (id) => document.getElementById(id);
 
-  const state = { season: "All", type: "All", view: "cards", hidden: new Set(), sort: { key: "start", dir: 1 } };
+  const state = { season: "All", type: "All", level: "All", view: "cards", hidden: new Set(), sort: { key: "start", dir: 1 } };
   let DATA = null;
+  const SCALE = { rd: 75, fd: 110 }; // bar length scale, adjusted to the data in init()
 
   function seg(c, name) {
     const s = (c.segments || []).find(x => x.name && x.name.toLowerCase().startsWith(name));
@@ -32,13 +33,27 @@
   }
   function norm(c) {
     const rd = seg(c, "rhythm"), fd = seg(c, "free");
-    return { ...c, rd, fd, rdScore: rd?.score ?? null, fdScore: fd?.score ?? null };
+    const rdOnly = !!rd && !fd && c.total != null; // didn't qualify for the free dance
+    return { ...c, rd, fd, rdOnly, rdScore: rd?.score ?? null, fdScore: fd?.score ?? null, fullTotal: rdOnly ? null : c.total };
+  }
+
+  const multiLevel = () => DATA.levels.length > 1;
+  // ISU personal best: the official value from the ISU bio (includes Challenger Series events), else computed from ISU events
+  function isuBest(list) {
+    const off = DATA.athletes?.isu_personal_bests?.total;
+    if (off && off.score != null) {
+      const c = list.find(x => x.fullTotal != null && Math.abs(x.fullTotal - off.score) < 0.005);
+      if (c) return { v: off.score, c };
+      if (list === DATA.competitions) return null;
+    }
+    return bestOf(list.filter(c => typeGroup(c.type) === "ISU"), c => c.fullTotal);
   }
 
   function filtered() {
     return DATA.competitions.filter(c =>
       (state.season === "All" || c.season === state.season) &&
-      (state.type === "All" || typeGroup(c.type) === state.type));
+      (state.type === "All" || typeGroup(c.type) === state.type) &&
+      (state.level === "All" || c.level === state.level));
   }
 
   function bestOf(list, getter) {
@@ -53,26 +68,31 @@
     const isu = all.filter(c => typeGroup(c.type) === "ISU");
     const podiums = all.filter(c => c.place && c.place <= 3).length;
     const wins = all.filter(c => c.place === 1).length;
-    const pb = bestOf(all, c => c.total);
-    const isuPb = bestOf(isu, c => c.total);
-    const titles = all.filter(c => c.type === "National" && /championship/i.test(c.short || c.name) && c.place === 1).length;
+    const pb = bestOf(all, c => c.fullTotal);
+    const isuPb = isuBest(all);
+    const champs = all.filter(c => c.type === "National" && /championship/i.test(c.short || c.name) && c.place === 1);
+    const titles = champs.length;
+    const lv = [...new Set(champs.map(c => (c.level || "").toLowerCase()).filter(Boolean))];
+    const titleSub = lv.length === 1 ? `${lv[0]} champions` : "national champions";
     $("stats").innerHTML = [
       { l: "Competitions", v: all.length, s: `${DATA.seasons.length} seasons` },
       { l: "Podiums", v: podiums, s: `${wins} win${wins === 1 ? "" : "s"}` },
       { l: "Best total", v: pb ? fmt(pb.v) : "–", s: pb ? pb.c.short || pb.c.name : "" },
       { l: "ISU best", v: isuPb ? fmt(isuPb.v) : "–", s: isuPb ? isuPb.c.short || isuPb.c.name : "" },
-      { l: "Swiss titles", v: titles, s: "junior champions" },
+      { l: "Swiss titles", v: titles, s: titleSub },
     ].map(x => `<div class="stat"><div class="l">${x.l}</div><div class="v">${x.v}</div><div class="s" data-full="${esc(x.s)}">${esc(x.s)}</div></div>`).join("");
   }
 
   /* ---------- Filters ---------- */
   function renderFilters() {
     const mk = (el, items, cur, onPick) => {
-      el.innerHTML = items.map(i => `<button role="tab" aria-selected="${i === cur}" class="${i === cur ? "on" : ""}" data-v="${esc(i)}">${esc(i === "All" && el.id === "seasonFilter" ? "All seasons" : i === "All" ? "All types" : i)}</button>`).join("");
+      el.innerHTML = items.map(i => `<button role="tab" aria-selected="${i === cur}" class="${i === cur ? "on" : ""}" data-v="${esc(i)}">${esc(i === "All" && el.id === "seasonFilter" ? "All seasons" : i === "All" && el.id === "levelFilter" ? "All levels" : i === "All" ? "All types" : i)}</button>`).join("");
       el.onclick = (e) => { const b = e.target.closest("button"); if (b) { onPick(b.dataset.v); render(); } };
     };
     mk($("seasonFilter"), ["All", ...DATA.seasons], state.season, v => state.season = v);
     mk($("typeFilter"), TYPES, state.type, v => state.type = v);
+    const lf = $("levelFilter");
+    if (DATA.levels.length > 1) { lf.hidden = false; mk(lf, ["All", ...DATA.levels], state.level, v => state.level = v); }
   }
 
   /* ---------- Chart ---------- */
@@ -95,7 +115,7 @@
     const m = { t: 34, r: 92, b: n0 > 8 ? 96 : 54, l: n0 > 8 ? 90 : 44 };
     const iw = W - m.l - m.r, ih = H - m.t - m.b;
     const series = SERIES.filter(s => !state.hidden.has(s.key));
-    const val = (c, k) => k === "total" ? c.total : k === "rd" ? c.rdScore : c.fdScore;
+    const val = (c, k) => k === "total" ? c.fullTotal : k === "rd" ? c.rdScore : c.fdScore;
     const vals = list.flatMap(c => series.map(s => val(c, s.key))).filter(v => v != null);
     let lo = Math.floor((Math.min(...vals) - 6) / 10) * 10, hi = Math.ceil((Math.max(...vals) + 6) / 10) * 10;
     lo = Math.max(0, lo);
@@ -128,9 +148,12 @@
     for (const s of series) {
       const color = cssVar(s.css);
       let d = "", pen = false;
-      list.forEach((c, i) => { const v = val(c, s.key); if (v == null) { pen = false; return; } d += `${pen ? "L" : "M"}${x(i)},${y(v)}`; pen = true; });
+      list.forEach((c, i) => { const v = val(c, s.key); if (v == null) { if (!c.rdOnly) pen = false; return; } d += `${pen ? "L" : "M"}${x(i)},${y(v)}`; pen = true; });
       g += `<path d="${d}" fill="none" stroke="${color}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>`;
-      list.forEach((c, i) => { const v = val(c, s.key); if (v != null) g += `<circle cx="${x(i)}" cy="${y(v)}" r="4.5" fill="${color}" stroke="${surface}" stroke-width="2"/>`; });
+      list.forEach((c, i) => { const v = val(c, s.key); if (v == null) return;
+        const hollow = multiLevel() && c.level === "Junior";
+        g += hollow ? `<circle cx="${x(i)}" cy="${y(v)}" r="4.5" fill="${surface}" stroke="${color}" stroke-width="2.5"/>`
+                    : `<circle cx="${x(i)}" cy="${y(v)}" r="4.5" fill="${color}" stroke="${surface}" stroke-width="2"/>`; });
       // direct label at last point
       for (let i = n - 1; i >= 0; i--) { const v = val(list[i], s.key); if (v != null) { g += `<text class="lbl" x="${x(i) + 10}" y="${y(v) + 4}">${s.label}</text>`; break; } }
       // PB marker
@@ -143,13 +166,17 @@
       g += `<rect data-i="${i}" x="${x(i) - w / 2}" y="${m.t}" width="${w}" height="${ih}" fill="transparent"/>`;
     });
     el.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Score progression chart">${g}</svg>`;
+    const notes = [];
+    if (multiLevel()) notes.push("○ junior event · ● senior event");
+    if (list.some(c => c.rdOnly)) notes.push("Events where they skated only the rhythm dance have no total or free dance point");
+    $("chartCaption").textContent = "Total, free dance and rhythm dance scores per competition" + (notes.length ? ". " + notes.join(". ") + "." : "");
 
     const svg = el.querySelector("svg"), cross = svg.querySelector("#cross"), tip = $("tooltip");
     svg.addEventListener("mousemove", (e) => {
       const r = e.target.closest("rect[data-i]"); if (!r) return;
       const i = +r.dataset.i, c = list[i];
       cross.setAttribute("x1", x(i)); cross.setAttribute("x2", x(i)); cross.setAttribute("visibility", "visible");
-      tip.innerHTML = `<div class="t">${flag(c.country)} ${esc(c.name)}</div><div class="d">${range(c.start, c.end)} · ${c.place ? ord(c.place) + " place" : "place n/a"}</div>` +
+      tip.innerHTML = `<div class="t">${flag(c.country)} ${esc(c.name)}</div><div class="d">${range(c.start, c.end)} · ${c.place ? ord(c.place) + " place" : "place n/a"}${multiLevel() ? " · " + esc(c.level) : ""}${c.rdOnly ? "<br>Rhythm dance only: not in the top 20 for the free dance" : ""}</div>` +
         SERIES.map(s => `<div class="r"><span><i class="sw" style="background:var(${s.css})"></i>${s.label}</span><b>${fmt(val(c, s.key))}</b></div>`).join("");
       tip.hidden = false;
       const tx = Math.min(window.innerWidth - tip.offsetWidth - 12, e.clientX + 16);
@@ -170,19 +197,14 @@
     const card = (k, css, b, note) => `<div class="card best"><div class="k">${css ? `<span class="sw" style="background:var(${css})"></span>` : ""}${k}</div>
       <div class="v">${b ? fmt(b.v) : "–"}</div><div class="w">${b ? `${flag(b.c.country)} ${esc(b.c.name)}` : "No data"}</div><div class="i">${b ? dfmt(b.c.start) : ""}${note ? " · " + note : ""}</div></div>`;
     $("bests").innerHTML =
-      card("Best total", "--series-1", bestOf(list, c => c.total), "any event") +
+      card("Best total", "--series-1", bestOf(list, c => c.fullTotal), "any event") +
       card("Best free dance", "--series-2", bestOf(list, c => c.fdScore), "") +
       card("Best rhythm dance", "--series-3", bestOf(list, c => c.rdScore), "") +
-      card("ISU personal best", null, bestOf(isu, c => c.total), "ISU events only");
+      card("ISU personal best", null, isuBest(list), "ISU-recognised events");
   }
 
   /* ---------- List ---------- */
-  function pbIds() {
-    const ids = new Set();
-    let best = -1;
-    for (const c of DATA.competitions) if (typeGroup(c.type) === "ISU" && c.total != null && c.total > best) { best = c.total; ids.add(c.id); }
-    return ids;
-  }
+  function pbIds() { const b = isuBest(DATA.competitions); return new Set(b ? [b.c.id] : []); }
 
   const ytId = (u) => (u || "").match(/[?&]v=([\w-]{11})|youtu\.be\/([\w-]{11})/)?.slice(1).find(Boolean);
   const playBtn = (s, c, label, cls = "play") => s && s.video
@@ -217,10 +239,10 @@
           <div class="place ${p && p <= 3 ? "p" + p : ""}">${p ? `<div>${p}<small>${c.participants ? "of " + c.participants : ord(p).replace(/\d+/, "")}</small></div>` : (c.total == null && /withdr/i.test(c.notes || "") ? `<div style="font-size:1rem">WD<small>withdrew</small></div>` : "–")}</div>
           <div>
             <div class="title">${flag(c.country)} ${esc(c.name)}</div>
-            <div class="meta"><span>${range(c.start, c.end)}</span>${c.city ? `<span>${esc(c.city)}${c.country ? ", " + esc(c.country) : ""}</span>` : ""}<span class="pill">${esc(c.type)}</span>${pbs.has(c.id) ? `<span class="pill pb">ISU PB</span>` : ""}${c.verified === false ? `<span class="pill warn">unverified</span>` : ""}${(c.segments || []).some(x => x.video) ? `<span class="pill vid">▶ Video</span>` : ""}${igLink(c)}</div>
-            <div class="segs">${segBar("Rhythm Dance", c.rd, "--series-3", 75, c)}${segBar("Free Dance", c.fd, "--series-2", 110, c)}</div>
+            <div class="meta"><span>${range(c.start, c.end)}</span>${c.city ? `<span>${esc(c.city)}${c.country ? ", " + esc(c.country) : ""}</span>` : ""}<span class="pill">${esc(c.type)}</span>${multiLevel() && c.level ? `<span class="pill lvl lvl-${esc(c.level.toLowerCase())}">${esc(c.level)}</span>` : ""}${pbs.has(c.id) ? `<span class="pill pb">ISU PB</span>` : ""}${c.verified === false ? `<span class="pill warn">unverified</span>` : ""}${(c.segments || []).some(x => x.video) ? `<span class="pill vid">▶ Video</span>` : ""}${igLink(c)}</div>
+            <div class="segs">${segBar("Rhythm Dance", c.rd, "--series-3", SCALE.rd, c)}${segBar("Free Dance", c.fd, "--series-2", SCALE.fd, c)}</div>
           </div>
-          <div class="total"><div class="l">Total</div><div class="v">${fmt(c.total)}</div></div>
+          <div class="total"><div class="l">${c.rdOnly ? "RD score" : "Total"}</div><div class="v">${fmt(c.total)}</div>${c.rdOnly ? `<div class="rdonly">No free dance: top 20 only</div>` : ""}</div>
           <div class="details">
             ${segRows ? `<table><tr><th>Segment</th><th>Place</th><th>Score</th><th>TES</th><th>PCS</th><th>Ded.</th><th>Video</th></tr>${segRows}</table>` : ""}
             ${igList(c)}
@@ -236,6 +258,7 @@
       { k: "start", l: "Date", f: c => dfmt(c.start), v: c => c.start },
       { k: "name", l: "Competition", f: c => `${flag(c.country)} ${esc(c.name)}`, v: c => c.name },
       { k: "type", l: "Type", f: c => esc(c.type), v: c => c.type },
+      ...(multiLevel() ? [{ k: "level", l: "Level", f: c => esc(c.level || ""), v: c => c.level || "" }] : []),
       { k: "place", l: "Place", f: c => c.place ? ord(c.place) + (c.participants ? ` / ${c.participants}` : "") : (/withdr/i.test(c.notes || "") ? "WD" : "–"), v: c => c.place ?? 999, n: 1 },
       { k: "rd", l: "RD", f: c => fmt(c.rdScore), v: c => c.rdScore ?? -1, n: 1 },
       { k: "fd", l: "FD", f: c => fmt(c.fdScore), v: c => c.fdScore ?? -1, n: 1 },
@@ -283,13 +306,16 @@
     const age = (d) => { const b = new Date(d), n = new Date(); let y = n.getFullYear() - b.getFullYear(); if (n < new Date(n.getFullYear(), b.getMonth(), b.getDate())) y--; return y; };
     const sk = a.skaters.map(k => `<div class="pf"><div class="nm">${esc(k.name.replace(/\b([A-ZÄÖÜ])([A-ZÄÖÜ]+)\b/g, (m, f, r) => f + r.toLowerCase()))}</div>
       <div class="muted">Born ${dfmt(k.birthdate)} in ${esc(k.birthplace || "–")} · ${age(k.birthdate)} yrs${k.height_cm ? " · " + k.height_cm + " cm" : ""}</div></div>`).join("");
-    const m = a.music_2026_27 || {};
+    const mk = Object.keys(a).filter(k => /^music_\d{4}_\d{2}$/.test(k)).sort().pop();
+    const m = (mk && a[mk]) || {}, ms = mk ? mk.slice(6).replace("_", "/") : "";
     $("profile").innerHTML = `<div class="card profile">
       <div class="pf-grid">${sk}
         <div class="pf"><div class="k">Club</div><div>${esc(a.skaters[0].club || "–")}</div></div>
-        <div class="pf"><div class="k">Coach & choreographer</div><div>${esc(a.coach || "–")}</div></div>
+        ${a.choreographer && a.coach && !a.coach.startsWith(a.choreographer)
+          ? `<div class="pf"><div class="k">Coach</div><div>${esc(a.coach)}</div></div><div class="pf"><div class="k">Choreographer</div><div>${esc(a.choreographer)}</div></div>`
+          : `<div class="pf"><div class="k">Coach${a.choreographer ? " & choreographer" : ""}</div><div>${esc(a.coach || "–")}</div></div>`}
       </div>
-      ${m.rhythm_dance ? `<div class="music"><div><span class="k">2026/27 Rhythm Dance</span> ${esc(m.rhythm_dance)}</div><div><span class="k">2026/27 Free Dance</span> ${esc(m.free_dance)}</div></div>` : ""}
+      ${m.rhythm_dance ? `<div class="music"><div><span class="k">${ms} Rhythm Dance</span> ${esc(m.rhythm_dance)}</div><div><span class="k">${ms} Free Dance</span> ${esc(m.free_dance)}</div></div>` : ""}
       <div class="links">${a.isu_bio ? `<a href="${esc(a.isu_bio)}" target="_blank" rel="noopener">ISU biography ↗</a>` : ""}${a.instagram ? `<a href="https://www.instagram.com/${esc(a.instagram)}/" target="_blank" rel="noopener">Instagram @${esc(a.instagram)} ↗</a>` : ""}${(a.instagram_personal || []).map(h => `<a href="https://www.instagram.com/${esc(h)}/" target="_blank" rel="noopener">@${esc(h)} ↗</a>`).join("")}</div>
     </div>`;
   }
@@ -331,7 +357,11 @@
 
   function init(data) {
     const comps = data.competitions.map(norm).sort((a, b) => (a.start || "").localeCompare(b.start || ""));
-    DATA = { ...data, competitions: comps, seasons: [...new Set(comps.map(c => c.season))] };
+    DATA = { ...data, competitions: comps, seasons: [...new Set(comps.map(c => c.season))],
+      levels: ["Junior", "Senior"].filter(l => comps.some(c => c.level === l)) };
+    const mx = (k) => Math.max(0, ...comps.map(c => c[k] || 0));
+    SCALE.rd = Math.max(75, Math.ceil(mx("rdScore") * 1.1 / 5) * 5);
+    SCALE.fd = Math.max(110, Math.ceil(mx("fdScore") * 1.1 / 5) * 5);
     $("updated").textContent = `Last updated ${dfmt(data.updated)}.`;
     initTheme(); initTruncTips(); renderStats(); renderProfile();
     $("viewToggle").onclick = (e) => { const b = e.target.closest("button"); if (!b) return; state.view = b.dataset.view;
