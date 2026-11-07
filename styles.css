@@ -111,7 +111,7 @@ a { color: var(--series-1); }
   background: rgba(18,17,19,.7); border: 1px solid rgba(217,221,227,.2); backdrop-filter: blur(6px);
 }
 @media (max-width: 900px) {
-  .hero-inner { grid-template-columns: 1fr; }
+  .hero-inner { grid-template-columns: minmax(0, 1fr); }
   .hero-photo { order: -1; margin-top: 10px; }
   .hero-photo img { max-height: 380px; }
   .hero-text { order: 0; }
@@ -303,3 +303,77 @@ table.res tr:hover td { background: var(--surface-2); }
 .pill.lvl-senior { background: color-mix(in oklab, var(--crimson) 16%, var(--surface-1)); color: var(--text-primary); border-color: transparent; }
 .pill.lvl-junior { background: color-mix(in oklab, var(--series-1) 14%, var(--surface-1)); color: var(--text-primary); border-color: transparent; }
 .total .rdonly { font-size: .72rem; color: var(--text-muted); margin-top: 2px; }
+
+
+/* ---------- Phones ---------- */
+.chart-scroll { max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; }
+.swipe-hint { margin: 6px 0 0; font-size: .76rem; color: var(--text-muted); text-align: center; }
+@media (max-width: 640px) {
+  .wrap { padding: 0 14px; }
+  .hero { padding: 14px 0 26px; }
+  .hero-inner { gap: 14px; }
+  .hero-photo { margin-top: 0; }
+  .hero-photo img { max-height: 260px; aspect-ratio: 4 / 3; object-position: 50% 12%; border-radius: 18px; }
+  .hero-photo figcaption { font-size: .7rem; left: 10px; bottom: 10px; }
+  .hero h1 { font-size: 2.05rem; margin: 18px 0 6px; }
+  .sub { font-size: .92rem; margin-bottom: 16px; }
+  .badge { font-size: .74rem; padding: 5px 10px; }
+  .teams { margin-left: 0; order: 3; width: 100%; justify-content: center; }
+  /* stats: one swipeable row of compact cards */
+  .stats { display: flex; overflow-x: auto; gap: 8px; scroll-snap-type: x mandatory; scroll-padding: 0 14px; margin: 0 -14px; padding: 0 14px 4px; scrollbar-width: none; }
+  .stats::-webkit-scrollbar { display: none; }
+  .stat { flex: 0 0 auto; min-width: 128px; scroll-snap-align: start; padding: 10px 12px; }
+  .stat .v { font-size: 1.4rem; }
+  .stat .l { font-size: .66rem; }
+  .stat .s { max-width: 150px; }
+  /* filters: each one a single swipeable row */
+  .controls { margin: -14px 0 14px; gap: 8px; flex-direction: column; }
+  .seg { flex-wrap: nowrap; overflow-x: auto; max-width: 100%; scrollbar-width: none; align-self: flex-start; }
+  .seg::-webkit-scrollbar { display: none; }
+  .seg button { padding: 6px 11px; font-size: .82rem; white-space: nowrap; flex: none; }
+  .card { padding: 14px; border-radius: 14px; }
+  .card-head { margin-bottom: 4px; }
+  .legend button { font-size: .78rem; padding: 4px 9px; }
+  .bests { grid-template-columns: 1fr 1fr; gap: 10px; margin: 14px 0 20px; }
+  .best { padding: 12px; }
+  .best .v { font-size: 1.4rem; }
+  .best .k { font-size: .66rem; }
+  .best .w { font-size: .78rem; }
+  .best .i { font-size: .72rem; }
+  .profile .pf-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .profile .nm { font-size: 1.05rem; }
+  .section-head { flex-direction: column; align-items: flex-start; }
+  /* competition cards: compact header row with place, title and total */
+  .comp { grid-template-columns: 44px 1fr auto; gap: 10px 12px; padding: 12px; align-items: start; }
+  .place { width: 44px; height: 44px; font-size: 1rem; border-width: 2px; }
+  .place small { font-size: .55rem; }
+  .comp .title { font-size: .94rem; line-height: 1.3; }
+  .comp .meta { font-size: .76rem; gap: 4px 8px; }
+  .total { grid-column: auto; text-align: right; }
+  .total .v { font-size: 1.2rem; }
+  .total .l { font-size: .6rem; }
+  .total .rdonly { display: none; }
+  .segs { grid-column: 1 / -1; }
+  .comp > div:nth-child(2) { display: contents; }
+  .comp > div:nth-child(2) > .title, .comp > div:nth-child(2) > .meta { grid-column: 2; }
+  .comp > div:nth-child(2) > .title { grid-row: 1; }
+  .comp > div:nth-child(2) > .meta { grid-row: 2; margin-top: 0; }
+  .comp .total { grid-column: 3; grid-row: 1 / 3; }
+  .comp .place { grid-row: 1 / 3; }
+  .place small { white-space: nowrap; }
+  .comp .segs { grid-row: 3; grid-column: 1 / -1; margin-top: 2px; gap: 10px; }
+  .segbar { min-width: 0; max-width: none; flex: 1 1 40%; }
+  .segbar .top { font-size: .74rem; }
+  .details { grid-row: 4; overflow-x: auto; }
+  .details table { font-size: .8rem; }
+  .igpost { grid-template-columns: 26px 1fr; font-size: .8rem; }
+  .igpost .go { display: none; }
+  table.res { font-size: .8rem; }
+  table.res th, table.res td { padding: 8px; }
+  .modal { padding: 10px; }
+  .modal-head h3 { font-size: .9rem; }
+  .tooltip { max-width: calc(100vw - 16px); }
+}
+
+.chart-scroll svg[width] { width: auto; max-width: none; }
+.chart .yaxis { position: absolute; left: 0; top: 0; pointer-events: none; background: linear-gradient(to right, var(--surface-1) 75%, transparent); }

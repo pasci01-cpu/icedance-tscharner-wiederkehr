@@ -111,7 +111,9 @@
     const list = filtered().filter(c => c.total != null || c.rdScore != null || c.fdScore != null);
     const el = $("chart");
     if (!list.length) { el.innerHTML = `<div class="empty">No scored competitions for this filter.</div>`; return; }
-    const n0 = list.length, W = Math.max(640, el.clientWidth || 900), H = n0 > 8 ? 370 : 320;
+    const n0 = list.length, cw = el.clientWidth || 900, narrow = cw < 640;
+    // On phones the chart keeps readable text and scrolls sideways instead of shrinking
+    const W = narrow ? Math.max(cw, 150 + n0 * 46) : Math.max(640, cw), H = n0 > 8 ? 370 : 320;
     const m = { t: 34, r: 92, b: n0 > 8 ? 96 : 54, l: n0 > 8 ? 90 : 44 };
     const iw = W - m.l - m.r, ih = H - m.t - m.b;
     const series = SERIES.filter(s => !state.hidden.has(s.key));
@@ -124,7 +126,7 @@
     const y = (v) => m.t + ih - ((v - lo) / (hi - lo)) * ih;
     const step = (hi - lo) > 80 ? 20 : 10;
 
-    let g = "";
+    let g = "", ax = "";
     // season bands
     const seasons = [];
     list.forEach((c, i) => { const last = seasons[seasons.length - 1]; if (!last || last.s !== c.season) seasons.push({ s: c.season, a: i, b: i }); else last.b = i; });
@@ -135,7 +137,8 @@
       g += `<text class="season-lbl" x="${(x0 + x1) / 2}" y="${m.t - 8}" text-anchor="middle">${esc(s.s)}</text>`;
     });
     for (let v = lo; v <= hi; v += step) {
-      g += `<line class="grid" x1="${m.l}" x2="${m.l + iw}" y1="${y(v)}" y2="${y(v)}"/><text x="${m.l - 8}" y="${y(v) + 4}" text-anchor="end">${v}</text>`;
+      g += `<line class="grid" x1="${m.l}" x2="${m.l + iw}" y1="${y(v)}" y2="${y(v)}"/>`;
+      ax += `<text x="${m.l - 8}" y="${y(v) + 4}" text-anchor="end">${v}</text>`;
     }
     list.forEach((c, i) => {
       const lbl = (c.short || c.name).replace(/\s+20\d\d$/, "").replace(/Swiss Junior Championships/, "Swiss Champs");
@@ -165,13 +168,16 @@
       const w = n === 1 ? iw : iw / (n - 1);
       g += `<rect data-i="${i}" x="${x(i) - w / 2}" y="${m.t}" width="${w}" height="${ih}" fill="transparent"/>`;
     });
-    el.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Score progression chart">${g}</svg>`;
+    // On phones the y-axis stays fixed while the plot scrolls
+    if (!narrow) g = ax + g;
+    el.innerHTML = `<div class="chart-scroll"><svg viewBox="0 0 ${W} ${H}" ${narrow ? `width="${W}" height="${H}"` : ""} role="img" aria-label="Score progression chart">${g}</svg></div>${narrow ? `<svg class="yaxis" width="${m.l}" height="${H}" style="width:${m.l}px;height:${H}px" aria-hidden="true">${ax}</svg>` : ""}${narrow && W > cw ? `<p class="swipe-hint">← swipe for earlier events</p>` : ""}`;
+    if (narrow) { const sc = el.querySelector(".chart-scroll"); sc.scrollLeft = sc.scrollWidth; }
     const notes = [];
     if (multiLevel()) notes.push("○ junior event · ● senior event");
     if (list.some(c => c.rdOnly)) notes.push("Events where they skated only the rhythm dance have no total or free dance point");
     $("chartCaption").textContent = "Total, free dance and rhythm dance scores per competition" + (notes.length ? ". " + notes.join(". ") + "." : "");
 
-    const svg = el.querySelector("svg"), cross = svg.querySelector("#cross"), tip = $("tooltip");
+    const svg = el.querySelector(".chart-scroll svg"), cross = svg.querySelector("#cross"), tip = $("tooltip");
     svg.addEventListener("mousemove", (e) => {
       const r = e.target.closest("rect[data-i]"); if (!r) return;
       const i = +r.dataset.i, c = list[i];
@@ -179,12 +185,17 @@
       tip.innerHTML = `<div class="t">${flag(c.country)} ${esc(c.name)}</div><div class="d">${range(c.start, c.end)} · ${c.place ? ord(c.place) + " place" : "place n/a"}${multiLevel() ? " · " + esc(c.level) : ""}${c.rdOnly ? "<br>Rhythm dance only: not in the top 20 for the free dance" : ""}</div>` +
         SERIES.map(s => `<div class="r"><span><i class="sw" style="background:var(${s.css})"></i>${s.label}</span><b>${fmt(val(c, s.key))}</b></div>`).join("");
       tip.hidden = false;
-      const tx = Math.min(window.innerWidth - tip.offsetWidth - 12, e.clientX + 16);
-      tip.style.left = tx + "px"; tip.style.top = (e.clientY - tip.offsetHeight - 12) + "px";
+      const tx = Math.max(8, Math.min(window.innerWidth - tip.offsetWidth - 8, e.clientX + 16));
+      const ty = e.clientY - tip.offsetHeight - 12;
+      tip.style.left = tx + "px"; tip.style.top = (ty < 8 ? e.clientY + 16 : ty) + "px";
     });
     svg.addEventListener("mouseleave", () => { tip.hidden = true; cross.setAttribute("visibility", "hidden"); });
+    let lastTap = -1;
+    const coarse = matchMedia("(pointer: coarse)").matches;
     svg.addEventListener("click", (e) => {
       const r = e.target.closest("rect[data-i]"); if (!r) return;
+      if (coarse && lastTap !== +r.dataset.i) { lastTap = +r.dataset.i; return; } // first tap: tooltip only
+      lastTap = -1; tip.hidden = true;
       const card = document.querySelector(`[data-id="${CSS.escape(list[+r.dataset.i].id)}"]`);
       if (card) { card.classList.add("open"); card.scrollIntoView({ behavior: "smooth", block: "center" }); }
     });
