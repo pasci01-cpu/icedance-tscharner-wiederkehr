@@ -1,0 +1,941 @@
+window.SKATE_DATA = {
+  "athletes": {
+    "team": "Seraina TSCHARNER / Laurin WIEDERKEHR",
+    "nation": "SUI",
+    "discipline": "Ice Dance",
+    "isu_id": "isufs00119064",
+    "isu_bio": "https://results.isu.org/bios/isufs00119064.htm",
+    "skaters": [
+      {
+        "name": "Seraina TSCHARNER",
+        "birthdate": "2008-01-16",
+        "birthplace": "Zurich",
+        "hometown": "Obfelden",
+        "height_cm": 158,
+        "club": "EC Küsnacht"
+      },
+      {
+        "name": "Laurin WIEDERKEHR",
+        "birthdate": "2006-02-10",
+        "birthplace": "Zollikerberg",
+        "hometown": "Zürich",
+        "height_cm": 175,
+        "club": "EC Küsnacht",
+        "skating_since": 2011,
+        "former_partners": [
+          "Milla O'BRIEN"
+        ]
+      }
+    ],
+    "coach": "Alisa Besseghier (née Agafonova)",
+    "choreographer": "Alisa Besseghier",
+    "training": "Küsnacht / Zürich",
+    "music_2026_27": {
+      "rhythm_dance": "Hound Dog / Can't Help Falling in Love / Trouble (Elvis Presley)",
+      "free_dance": "Revelatory / Main Titles / Off the Grid (Now You See Me 2, Brian Tyler)"
+    },
+    "isu_personal_bests": {
+      "total": {
+        "score": 134.0,
+        "event": "ISU JGP Solidarity Cup 2025"
+      },
+      "rhythm_dance": {
+        "score": 52.97,
+        "event": "ISU JGP Solidarity Cup 2025"
+      },
+      "free_dance": {
+        "score": 81.03,
+        "event": "ISU JGP Solidarity Cup 2025"
+      }
+    },
+    "instagram": "seraina_laurin_icedance",
+    "instagram_personal": [
+      "seraina.ts",
+      "laurin_wied137"
+    ]
+  },
+  "updated": "2026-11-07",
+  "scope_notes": "Covers seasons 2024/25 to 2026/27 (up to 2026-11-07). Left out because they are 2023/24 events: Bosphorus Cup 2023 (8th), Swiss Championships 2024 in Küsnacht, held Dec 2023 (2nd, 131.50), Ephesus Cup 2024 in Izmir, held Jan 2024 (6th, 134.27), Aarauer Cup 2024 and Coupe Erguel 2023. The list of events was cross-checked against the ISU bio competition list and the fsresults.info couple page.",
+  "competitions": [
+    {
+      "id": "jgp-czech-skate-2024",
+      "season": "2024/25",
+      "name": "ISU JGP Czech Skate 2024",
+      "short": "JGP Czech Skate 2024",
+      "city": "Ostrava",
+      "country": "CZE",
+      "start": "2024-09-04",
+      "end": "2024-09-07",
+      "type": "JGP",
+      "place": 13,
+      "participants": 19,
+      "total": 115.06,
+      "segments": [
+        {
+          "name": "Rhythm Dance",
+          "place": 12,
+          "score": 46.18,
+          "tes": 27.77,
+          "pcs": 18.41,
+          "deductions": 0.0,
+          "video": "https://www.youtube.com/watch?v=o71kNR-zfxs"
+        },
+        {
+          "name": "Free Dance",
+          "place": 13,
+          "score": 68.88,
+          "tes": 37.54,
+          "pcs": 31.34,
+          "deductions": 0.0,
+          "video": "https://www.youtube.com/watch?v=Pj6XleGx0-4"
+        }
+      ],
+      "notes": "RD 06.09.2024, FD 07.09.2024. Their only JGP of 2024/25.",
+      "sources": [
+        "https://results.isu.org/results/season2425/jgpcze2024/index.htm",
+        "https://results.isu.org/results/season2425/jgpcze2024/CAT004RS.htm",
+        "https://results.isu.org/results/season2425/jgpcze2024/SEG007.htm",
+        "https://results.isu.org/results/season2425/jgpcze2024/SEG008.htm"
+      ],
+      "level": "Junior",
+      "verified": true,
+      "instagram": [
+        {
+          "url": "https://www.instagram.com/p/C_3kYjDiDVP/",
+          "account": "seraina_laurin_icedance",
+          "date": "2024-09-13",
+          "caption": "“We feel honoured that we were able to start our season with the Junior Grand Prix in Ostrava!”"
+        }
+      ]
+    },
+    {
+      "id": "ticino-cup-2024",
+      "season": "2024/25",
+      "name": "Ticino Cup 2024",
+      "short": "Ticino Cup 2024",
+      "city": "Bellinzona",
+      "country": "SUI",
+      "start": "2024-10-04",
+      "end": "2024-10-06",
+      "type": "National",
+      "place": 1,
+      "participants": 1,
+      "total": 126.45,
+      "segments": [
+        {
+          "name": "Rhythm Dance",
+          "place": 1,
+          "score": 49.67,
+          "tes": 28.32,
+          "pcs": 21.35,
+          "deductions": 0.0
+        },
+        {
+          "name": "Free Dance",
+          "place": 1,
+          "score": 76.78,
+          "tes": 43.14,
+          "pcs": 33.64,
+          "deductions": 0.0
+        }
+      ],
+      "notes": "Swiss Cup event, category 'Junior Coppia Ice Dance'; they were the only couple entered. RD 05.10.2024, FD 06.10.2024. Results page spells the city 'Bellizona'. Club shown: KUS (EC Kusnacht).",
+      "sources": [
+        "https://resultate.swissiceskating.ch/2024_2025/swisscup/Ticino_Cup_2024/index.htm",
+        "https://resultate.swissiceskating.ch/2024_2025/swisscup/Ticino_Cup_2024/CAT022RS.htm",
+        "https://resultate.swissiceskating.ch/2024_2025/swisscup/Ticino_Cup_2024/SEG016.htm",
+        "https://resultate.swissiceskating.ch/2024_2025/swisscup/Ticino_Cup_2024/SEG019.htm"
+      ],
+      "level": "Junior",
+      "verified": true
+    },
+    {
+      "id": "pavel-roman-memorial-2024",
+      "season": "2024/25",
+      "name": "Pavel Roman Memorial 2024",
+      "short": "Pavel Roman 2024",
+      "city": "Olomouc",
+      "country": "CZE",
+      "start": "2024-11-09",
+      "end": "2024-11-10",
+      "type": "International",
+      "place": 8,
+      "participants": 23,
+      "total": 135.63,
+      "segments": [
+        {
+          "name": "Rhythm Dance",
+          "place": 8,
+          "score": 50.81,
+          "tes": 28.44,
+          "pcs": 22.37,
+          "deductions": 0.0
+        },
+        {
+          "name": "Free Dance",
+          "place": 6,
+          "score": 84.82,
+          "tes": 47.32,
+          "pcs": 37.5,
+          "deductions": 0.0
+        }
+      ],
+      "notes": "RD 09.11.2024, FD 10.11.2024.",
+      "sources": [
+        "https://www.czechskating.org/wp-content/uploads/result_html/63307/index.htm",
+        "https://www.czechskating.org/wp-content/uploads/result_html/63307/CAT002RS.htm",
+        "https://www.czechskating.org/wp-content/uploads/result_html/63307/SEG003.htm",
+        "https://www.czechskating.org/wp-content/uploads/result_html/63307/SEG004.htm"
+      ],
+      "level": "Junior",
+      "verified": true,
+      "instagram": [
+        {
+          "url": "https://www.instagram.com/p/DCOS2DxCH4M/",
+          "account": "seraina_laurin_icedance",
+          "date": "2024-11-10",
+          "caption": "New personal best of 135.63 and the minimum score for Junior Worlds."
+        }
+      ]
+    },
+    {
+      "id": "bosphorus-cup-2024",
+      "season": "2024/25",
+      "name": "Bosphorus Cup 2024",
+      "short": "Bosphorus Cup 2024",
+      "city": "Istanbul",
+      "country": "TUR",
+      "start": "2024-11-25",
+      "end": "2024-12-01",
+      "type": "International",
+      "place": 6,
+      "participants": 15,
+      "total": 131.34,
+      "segments": [
+        {
+          "name": "Rhythm Dance",
+          "place": 7,
+          "score": 52.08,
+          "tes": 28.47,
+          "pcs": 23.61,
+          "deductions": 0.0
+        },
+        {
+          "name": "Free Dance",
+          "place": 6,
+          "score": 79.26,
+          "tes": 41.66,
+          "pcs": 37.6,
+          "deductions": 0.0
+        }
+      ],
+      "notes": "RD 29.11.2024, FD 30.11.2024. 15 couples classified; 1 more withdrew.",
+      "sources": [
+        "https://onlinesonuclar.buzpateni.org.tr/Sezon/2025/250111bosphorus2024/index.htm",
+        "https://onlinesonuclar.buzpateni.org.tr/Sezon/2025/250111bosphorus2024/CAT006RS.htm",
+        "https://onlinesonuclar.buzpateni.org.tr/Sezon/2025/250111bosphorus2024/SEG011.htm",
+        "https://onlinesonuclar.buzpateni.org.tr/Sezon/2025/250111bosphorus2024/SEG012.htm"
+      ],
+      "level": "Junior",
+      "verified": true
+    },
+    {
+      "id": "swiss-championships-2025-geneva",
+      "season": "2024/25",
+      "name": "Championnats Suisses Seniors et Juniors 2025, Genève",
+      "short": "Swiss Junior Championships 2025",
+      "city": "Geneva",
+      "country": "SUI",
+      "start": "2024-12-13",
+      "end": "2024-12-15",
+      "type": "National",
+      "place": 1,
+      "participants": 2,
+      "total": 137.0,
+      "segments": [
+        {
+          "name": "Rhythm Dance",
+          "place": 1,
+          "score": 55.4,
+          "tes": 32.91,
+          "pcs": 22.49,
+          "deductions": 0.0
+        },
+        {
+          "name": "Free Dance",
+          "place": 1,
+          "score": 81.6,
+          "tes": 45.26,
+          "pcs": 36.34,
+          "deductions": 0.0
+        }
+      ],
+      "notes": "Swiss junior ice dance champions. Held in December 2024, so it counts in season 2024/25. RD 14.12.2024, FD 15.12.2024. Only 2 couples (2nd: Lévy / Llorente).",
+      "sources": [
+        "https://resultate.swissiceskating.ch/2024_2025/sm/SM_Seniors_Juniors/index.htm",
+        "https://resultate.swissiceskating.ch/2024_2025/sm/SM_Seniors_Juniors/CAT009RS.htm",
+        "https://resultate.swissiceskating.ch/2024_2025/sm/SM_Seniors_Juniors/SEG015.htm",
+        "https://resultate.swissiceskating.ch/2024_2025/sm/SM_Seniors_Juniors/SEG016.htm"
+      ],
+      "level": "Junior",
+      "verified": true,
+      "instagram": [
+        {
+          "url": "https://www.instagram.com/p/DDu5YIkCWHF/",
+          "account": "seraina_laurin_icedance",
+          "date": "2024-12-18",
+          "caption": "“We are the Junior National Champions of Ice dance.”"
+        }
+      ]
+    },
+    {
+      "id": "challenge-cup-2025",
+      "season": "2024/25",
+      "name": "Challenge Cup 2025",
+      "short": "Challenge Cup 2025",
+      "city": "Tilburg",
+      "country": "NED",
+      "start": "2025-02-13",
+      "end": "2025-02-16",
+      "type": "International",
+      "place": 5,
+      "participants": 7,
+      "total": 120.68,
+      "segments": [
+        {
+          "name": "Rhythm Dance",
+          "place": 6,
+          "score": 47.56,
+          "tes": 25.5,
+          "pcs": 22.06,
+          "deductions": 0.0
+        },
+        {
+          "name": "Free Dance",
+          "place": 4,
+          "score": 73.12,
+          "tes": 38.28,
+          "pcs": 34.84,
+          "deductions": 0.0
+        }
+      ],
+      "notes": "RD 13.02.2025, FD 14.02.2025. 7 couples classified; 3 more withdrew.",
+      "sources": [
+        "https://www.knsbfigureskatingresults.nl/2024-2025/20250213/index.htm",
+        "https://www.knsbfigureskatingresults.nl/2024-2025/20250213/CAT008RS.htm",
+        "https://www.knsbfigureskatingresults.nl/2024-2025/20250213/SEG015.htm",
+        "https://www.knsbfigureskatingresults.nl/2024-2025/20250213/SEG016.htm"
+      ],
+      "level": "Junior",
+      "verified": true
+    },
+    {
+      "id": "test-skate-2025",
+      "season": "2025/26",
+      "name": "TEST SKATE 2025",
+      "short": "Test Skate 2025",
+      "city": "Dübendorf",
+      "country": "SUI",
+      "start": "2025-08-09",
+      "end": "2025-08-10",
+      "type": "National",
+      "place": 1,
+      "participants": 3,
+      "total": 135.68,
+      "segments": [
+        {
+          "name": "Rhythm Dance",
+          "place": 1,
+          "score": 54.32,
+          "tes": 30.04,
+          "pcs": 24.28,
+          "deductions": 0.0
+        },
+        {
+          "name": "Free Dance",
+          "place": 1,
+          "score": 81.36,
+          "tes": 43.86,
+          "pcs": 37.5,
+          "deductions": 0.0
+        }
+      ],
+      "notes": "Swiss regional test competition to start the season. RD 09.08.2025, FD 10.08.2025.",
+      "sources": [
+        "https://resultate.swissiceskating.ch/2025_2026/regional/testskate_2025/index.htm",
+        "https://resultate.swissiceskating.ch/2025_2026/regional/testskate_2025/CAT007RS.htm",
+        "https://resultate.swissiceskating.ch/2025_2026/regional/testskate_2025/SEG009.htm",
+        "https://resultate.swissiceskating.ch/2025_2026/regional/testskate_2025/SEG010.htm"
+      ],
+      "level": "Junior",
+      "verified": true
+    },
+    {
+      "id": "jgp-riga-cup-2025",
+      "season": "2025/26",
+      "name": "ISU JGP Riga Cup 2025",
+      "short": "JGP Riga Cup 2025",
+      "city": "Riga",
+      "country": "LAT",
+      "start": "2025-08-20",
+      "end": "2025-08-23",
+      "type": "JGP",
+      "place": 7,
+      "participants": 15,
+      "total": 126.68,
+      "segments": [
+        {
+          "name": "Rhythm Dance",
+          "place": 8,
+          "score": 47.03,
+          "tes": 25.36,
+          "pcs": 21.67,
+          "deductions": 0.0,
+          "video": "https://www.youtube.com/watch?v=pgZqUbOF6gg"
+        },
+        {
+          "name": "Free Dance",
+          "place": 7,
+          "score": 79.65,
+          "tes": 43.73,
+          "pcs": 35.92,
+          "deductions": 0.0,
+          "video": "https://www.youtube.com/watch?v=GAyNAMWA6ss"
+        }
+      ],
+      "notes": "RD 22.08.2025, FD 23.08.2025. 15 couples classified; 1 more withdrew.",
+      "sources": [
+        "https://results.isu.org/events/jgplat2025_JuniorIceDance.htm",
+        "https://results.isu.org/results/season2526/jgplat2025/index.htm",
+        "https://results.isu.org/results/season2526/jgplat2025/SEG007.htm",
+        "https://results.isu.org/results/season2526/jgplat2025/SEG008.htm"
+      ],
+      "level": "Junior",
+      "verified": true,
+      "instagram": [
+        {
+          "url": "https://www.instagram.com/p/DOHDtgICDl5/",
+          "account": "seraina_laurin_icedance",
+          "date": "2025-09-02",
+          "caption": "“Overall we are very happy with the outcome of our first JGP of the season.”"
+        }
+      ]
+    },
+    {
+      "id": "jgp-solidarity-cup-2025",
+      "season": "2025/26",
+      "name": "ISU JGP Solidarity Cup 2025",
+      "short": "JGP Solidarity Cup 2025",
+      "city": "Gdansk",
+      "country": "POL",
+      "start": "2025-10-01",
+      "end": "2025-10-04",
+      "type": "JGP",
+      "place": 7,
+      "participants": 17,
+      "total": 134.0,
+      "segments": [
+        {
+          "name": "Rhythm Dance",
+          "place": 7,
+          "score": 52.97,
+          "tes": 30.11,
+          "pcs": 22.86,
+          "deductions": 0.0,
+          "video": "https://www.youtube.com/watch?v=g2-uD__2Lw8"
+        },
+        {
+          "name": "Free Dance",
+          "place": 7,
+          "score": 81.03,
+          "tes": 44.55,
+          "pcs": 36.48,
+          "deductions": 0.0,
+          "video": "https://www.youtube.com/watch?v=eCsYAeOaxqk"
+        }
+      ],
+      "notes": "RD 03.10.2025, FD 04.10.2025. This is their ISU personal best total (134.00) and RD/FD personal bests, per their ISU bio. Their higher scores at non-ISU events do not count as ISU personal bests.",
+      "sources": [
+        "https://results.isu.org/events/jgppol2025_JuniorIceDance.htm",
+        "https://results.isu.org/results/season2526/jgppol2025/index.htm",
+        "https://results.isu.org/results/season2526/jgppol2025/SEG007.htm",
+        "https://results.isu.org/results/season2526/jgppol2025/SEG008.htm"
+      ],
+      "level": "Junior",
+      "verified": true,
+      "instagram": [
+        {
+          "url": "https://www.instagram.com/p/DPhHb1PCN4q/",
+          "account": "seraina_laurin_icedance",
+          "date": "2025-10-07",
+          "caption": "New personal best of 134.00, 7th place and the Junior Worlds minimums."
+        }
+      ]
+    },
+    {
+      "id": "swiss-ice-skating-open-2025",
+      "season": "2025/26",
+      "name": "Swiss Ice Skating Open 2025",
+      "short": "Swiss Open 2025",
+      "city": "Lausanne",
+      "country": "SUI",
+      "start": "2025-10-23",
+      "end": "2025-10-26",
+      "type": "International",
+      "place": 2,
+      "participants": 6,
+      "total": 129.87,
+      "segments": [
+        {
+          "name": "Rhythm Dance",
+          "place": 2,
+          "score": 52.11,
+          "tes": 29.29,
+          "pcs": 22.82,
+          "deductions": 0.0
+        },
+        {
+          "name": "Free Dance",
+          "place": 2,
+          "score": 77.76,
+          "tes": 41.94,
+          "pcs": 35.82,
+          "deductions": 0.0
+        }
+      ],
+      "notes": "RD 23.10.2025, FD 24.10.2025.",
+      "sources": [
+        "https://resultate.swissiceskating.ch/2025_2026/sm/Swiss_Ice_Skating_Open_2025/index.htm",
+        "https://resultate.swissiceskating.ch/2025_2026/sm/Swiss_Ice_Skating_Open_2025/CAT008RS.htm",
+        "https://resultate.swissiceskating.ch/2025_2026/sm/Swiss_Ice_Skating_Open_2025/SEG015.htm",
+        "https://resultate.swissiceskating.ch/2025_2026/sm/Swiss_Ice_Skating_Open_2025/SEG016.htm"
+      ],
+      "level": "Junior",
+      "verified": true,
+      "instagram": [
+        {
+          "url": "https://www.instagram.com/p/DQkPUFmCMBK/",
+          "account": "seraina_laurin_icedance",
+          "date": "2025-11-02",
+          "caption": "“Our first international medal together at the Swiss Open!” 🥈"
+        }
+      ]
+    },
+    {
+      "id": "nrw-trophy-2025",
+      "season": "2025/26",
+      "name": "NRW-Trophy 2025",
+      "short": "NRW Trophy 2025",
+      "city": "Dortmund",
+      "country": "GER",
+      "start": "2025-11-13",
+      "end": "2025-11-16",
+      "type": "International",
+      "place": 5,
+      "participants": 19,
+      "total": 139.54,
+      "segments": [
+        {
+          "name": "Rhythm Dance",
+          "place": 6,
+          "score": 53.82,
+          "tes": 29.99,
+          "pcs": 23.83,
+          "deductions": 0.0
+        },
+        {
+          "name": "Free Dance",
+          "place": 5,
+          "score": 85.72,
+          "tes": 46.56,
+          "pcs": 39.16,
+          "deductions": 0.0
+        }
+      ],
+      "notes": "RD 15.11.2025, FD 16.11.2025.",
+      "sources": [
+        "http://deu-event.de/results/NRW/NRWTROPHY2025/index.htm",
+        "http://deu-event.de/results/NRW/NRWTROPHY2025/CAT006RS.htm",
+        "http://deu-event.de/results/NRW/NRWTROPHY2025/SEG011.htm",
+        "http://deu-event.de/results/NRW/NRWTROPHY2025/SEG012.htm"
+      ],
+      "level": "Junior",
+      "verified": true
+    },
+    {
+      "id": "tallinn-trophy-2025",
+      "season": "2025/26",
+      "name": "ISU CS Tallinn Trophy 2025",
+      "short": "Tallinn Trophy 2025",
+      "city": "Tallinn",
+      "country": "EST",
+      "start": "2025-11-25",
+      "end": "2025-11-30",
+      "type": "International",
+      "place": 2,
+      "participants": 15,
+      "total": 146.26,
+      "segments": [
+        {
+          "name": "Rhythm Dance",
+          "place": 2,
+          "score": 56.37,
+          "tes": 31.99,
+          "pcs": 24.38,
+          "deductions": 0.0
+        },
+        {
+          "name": "Free Dance",
+          "place": 2,
+          "score": 89.89,
+          "tes": 50.23,
+          "pcs": 39.66,
+          "deductions": 0.0
+        }
+      ],
+      "notes": "The junior event was not part of the Challenger Series. RD 29.11.2025, FD 30.11.2025. Silver medal, behind Bianchi / Basile (ITA).",
+      "sources": [
+        "https://current.fsresults.info/2025-2026/CSEST2025/index.htm",
+        "https://current.fsresults.info/2025-2026/CSEST2025/CAT006RS.htm",
+        "https://current.fsresults.info/2025-2026/CSEST2025/SEG011.htm",
+        "https://current.fsresults.info/2025-2026/CSEST2025/SEG012.htm"
+      ],
+      "level": "Junior",
+      "verified": true,
+      "instagram": [
+        {
+          "url": "https://www.instagram.com/p/DRzshbpiF69/",
+          "account": "seraina_laurin_icedance",
+          "date": "2025-12-03",
+          "caption": "“A new personal best, our second international medal.” 🥈"
+        }
+      ]
+    },
+    {
+      "id": "swiss-championships-2026-lugano",
+      "season": "2025/26",
+      "name": "Campionati Svizzeri 2026 (Swiss Championships), Lugano",
+      "short": "Swiss Junior Championships 2026",
+      "city": "Lugano",
+      "country": "SUI",
+      "start": "2025-12-19",
+      "end": "2025-12-21",
+      "type": "National",
+      "place": 1,
+      "participants": 2,
+      "total": 139.2,
+      "segments": [
+        {
+          "name": "Rhythm Dance",
+          "place": 2,
+          "score": 51.79,
+          "tes": 29.1,
+          "pcs": 22.69,
+          "deductions": 0.0
+        },
+        {
+          "name": "Free Dance",
+          "place": 1,
+          "score": 87.41,
+          "tes": 49.91,
+          "pcs": 37.5,
+          "deductions": 0.0
+        }
+      ],
+      "notes": "Swiss junior ice dance champions. Held in December 2025, so it counts in season 2025/26. They were 2nd in the RD behind Woodtli / Suhner and won overall after the FD. RD 20.12.2025, FD 21.12.2025. Only 2 couples.",
+      "sources": [
+        "https://resultate.swissiceskating.ch/2025_2026/sm/SM_Seniors_Juniors/index.htm",
+        "https://resultate.swissiceskating.ch/2025_2026/sm/SM_Seniors_Juniors/CAT008RS.htm",
+        "https://resultate.swissiceskating.ch/2025_2026/sm/SM_Seniors_Juniors/SEG015.htm",
+        "https://resultate.swissiceskating.ch/2025_2026/sm/SM_Seniors_Juniors/SEG016.htm"
+      ],
+      "level": "Junior",
+      "verified": true,
+      "instagram": [
+        {
+          "url": "https://www.instagram.com/p/DSqN02xiIBa/",
+          "account": "seraina_laurin_icedance",
+          "date": "2025-12-24",
+          "caption": "“We are Junior Swiss Champions, and we couldn’t be more grateful.”"
+        }
+      ]
+    },
+    {
+      "id": "edge-cup-2026",
+      "season": "2025/26",
+      "name": "Edge Cup 2026",
+      "short": "EDGE Cup 2026",
+      "city": "Katowice",
+      "country": "POL",
+      "start": "2026-01-27",
+      "end": "2026-02-02",
+      "type": "International",
+      "place": 4,
+      "participants": 23,
+      "total": 142.34,
+      "segments": [
+        {
+          "name": "Rhythm Dance",
+          "place": 3,
+          "score": 56.07,
+          "tes": 31.35,
+          "pcs": 24.72,
+          "deductions": 0.0
+        },
+        {
+          "name": "Free Dance",
+          "place": 4,
+          "score": 86.27,
+          "tes": 47.59,
+          "pcs": 39.68,
+          "deductions": 1.0
+        }
+      ],
+      "notes": "Segment dates are not shown on the results index; the dates given are the whole event. FD includes a 1.00 deduction.",
+      "sources": [
+        "https://pzlf-wyniki.pl/2526/EC2026/index.htm",
+        "https://pzlf-wyniki.pl/2526/EC2026/CAT006RS.htm",
+        "https://pzlf-wyniki.pl/2526/EC2026/SEG011.htm",
+        "https://pzlf-wyniki.pl/2526/EC2026/SEG012.htm"
+      ],
+      "level": "Junior",
+      "verified": true
+    },
+    {
+      "id": "wjc-2026",
+      "season": "2025/26",
+      "name": "ISU World Junior Figure Skating Championships 2026",
+      "short": "Junior Worlds 2026",
+      "city": "Tallinn",
+      "country": "EST",
+      "start": "2026-03-03",
+      "end": "2026-03-08",
+      "type": "ISU Championship",
+      "place": 13,
+      "participants": 30,
+      "total": 129.98,
+      "segments": [
+        {
+          "name": "Rhythm Dance",
+          "place": 17,
+          "score": 49.21,
+          "tes": 25.51,
+          "pcs": 23.7,
+          "deductions": 0.0,
+          "video": "https://www.youtube.com/watch?v=1BIZVHe4VGA"
+        },
+        {
+          "name": "Free Dance",
+          "place": 12,
+          "score": 80.77,
+          "tes": 45.27,
+          "pcs": 35.5,
+          "deductions": 0.0,
+          "video": "https://www.youtube.com/watch?v=yXY6QMZtmT8"
+        }
+      ],
+      "notes": "RD 06.03.2026, FD 07.03.2026. 30 couples in the RD; 20 qualified for the FD.",
+      "sources": [
+        "https://results.isu.org/events/wjc2026_JuniorIceDance.htm",
+        "https://results.isu.org/results/season2526/wjc2026/index.htm",
+        "https://results.isu.org/results/season2526/wjc2026/SEG007.htm",
+        "https://results.isu.org/results/season2526/wjc2026/SEG008.htm"
+      ],
+      "level": "Junior",
+      "verified": true,
+      "instagram": [
+        {
+          "url": "https://www.instagram.com/p/DVrgEyCiD_h/",
+          "account": "seraina_laurin_icedance",
+          "date": "2026-03-09",
+          "caption": "“What an unforgettable experience at our first Junior Worlds.” They earned 6 JGP spots for Switzerland."
+        },
+        {
+          "url": "https://www.instagram.com/p/DVasCQkDDjw/",
+          "account": "mcdonalds_buelach",
+          "date": "2026-03-03",
+          "caption": "Sponsor McDonald’s Bülach wishing them luck before Junior Worlds in Tallinn."
+        }
+      ]
+    },
+    {
+      "id": "jgp-bangkok-2026",
+      "season": "2026/27",
+      "name": "ISU JGP Bangkok 2026",
+      "short": "JGP Bangkok 2026",
+      "city": "Bangkok",
+      "country": "THA",
+      "start": "2026-09-03",
+      "end": "2026-09-05",
+      "type": "JGP",
+      "place": 11,
+      "participants": 17,
+      "total": 122.39,
+      "segments": [
+        {
+          "name": "Rhythm Dance",
+          "place": 10,
+          "score": 49.71,
+          "tes": 26.63,
+          "pcs": 23.08,
+          "deductions": 0.0,
+          "video": "https://www.youtube.com/watch?v=i05aGPWEaIA"
+        },
+        {
+          "name": "Free Dance",
+          "place": 11,
+          "score": 72.68,
+          "tes": 40.6,
+          "pcs": 34.08,
+          "deductions": 2.0,
+          "video": "https://www.youtube.com/watch?v=QqHLthVa8O0"
+        }
+      ],
+      "notes": "RD 04.09.2026, FD 05.09.2026. FD includes a 2.00 deduction. The RD score of 49.71 is their ISU season best RD for 2026/27.",
+      "sources": [
+        "https://results.isu.org/events/jgptha2026_JuniorIceDance.htm",
+        "https://results.isu.org/results/season2627/jgptha2026/index.htm",
+        "https://results.isu.org/results/season2627/jgptha2026/SEG005.htm",
+        "https://results.isu.org/results/season2627/jgptha2026/SEG006.htm"
+      ],
+      "level": "Junior",
+      "verified": true,
+      "instagram": [
+        {
+          "url": "https://www.instagram.com/p/DdEjf6kCCYQ/",
+          "account": "seraina_laurin_icedance",
+          "date": "2026-09-09",
+          "caption": "“Unfortunately, this competition didn’t go the way we had hoped.” New free dance created with Stéphane Lambiel."
+        }
+      ]
+    },
+    {
+      "id": "jgp-batumi-2026",
+      "season": "2026/27",
+      "name": "ISU JGP Batumi 2026",
+      "short": "JGP Batumi 2026",
+      "city": "Batumi",
+      "country": "GEO",
+      "start": "2026-09-24",
+      "end": "2026-09-26",
+      "type": "JGP",
+      "place": 11,
+      "participants": 18,
+      "total": 127.9,
+      "segments": [
+        {
+          "name": "Rhythm Dance",
+          "place": 12,
+          "score": 47.37,
+          "tes": 25.06,
+          "pcs": 22.31,
+          "deductions": 0.0,
+          "video": "https://www.youtube.com/watch?v=NhLdEc5BgK4"
+        },
+        {
+          "name": "Free Dance",
+          "place": 9,
+          "score": 80.53,
+          "tes": 45.53,
+          "pcs": 35.0,
+          "deductions": 0.0,
+          "video": "https://www.youtube.com/watch?v=JLWbsc-kKhQ"
+        }
+      ],
+      "notes": "RD 25.09.2026, FD 26.09.2026. Their second JGP of 2026/27.",
+      "sources": [
+        "https://results.isu.org/events/jgpgeo2026_JuniorIceDance.htm",
+        "https://results.isu.org/results/season2627/jgpgeo2026/index.htm",
+        "https://results.isu.org/results/season2627/jgpgeo2026/SEG005.htm",
+        "https://results.isu.org/results/season2627/jgpgeo2026/SEG006.htm"
+      ],
+      "level": "Junior",
+      "verified": true,
+      "instagram": [
+        {
+          "url": "https://www.instagram.com/p/DeOu1cKCDEh/",
+          "account": "seraina_laurin_icedance",
+          "date": "2026-10-08",
+          "caption": "“The first day didn’t go quite the way we had hoped, but we managed to turn things around on the second day.”"
+        },
+        {
+          "url": "https://www.instagram.com/isufigureskating/reel/Dd0mEMclrsx/",
+          "account": "isufigureskating",
+          "date": "2026-09-27",
+          "caption": "ISU reel: Mark Hanretty’s Junior Spotlight on the team in Batumi."
+        },
+        {
+          "url": "https://www.instagram.com/geoskating/reel/DdvsHUqRowx/",
+          "account": "geoskating",
+          "date": "2026-09-26",
+          "caption": "Georgian Federation reel of their free dance: “All magic comes with a price.”"
+        }
+      ]
+    },
+    {
+      "id": "budapest-trophy-2026",
+      "season": "2026/27",
+      "name": "Budapest Trophy 2026",
+      "short": "Budapest Trophy 2026",
+      "city": "Budapest",
+      "country": "HUN",
+      "start": "2026-10-15",
+      "end": "2026-10-18",
+      "type": "International",
+      "place": null,
+      "participants": null,
+      "total": null,
+      "segments": [],
+      "notes": "Entered, but withdrew before the Rhythm Dance (marked WD, start #22). They have no result. Event dates are from the fsresults.info and Wikipedia listings (15/16 to 18 October 2026); the junior RD was on 16.10.2026.",
+      "sources": [
+        "https://hunskate.hu/external/mukorcsolya/2026_2027/BudTrophy2026/index.htm",
+        "https://hunskate.hu/external/mukorcsolya/2026_2027/BudTrophy2026/CAT006RS.htm",
+        "https://hunskate.hu/external/mukorcsolya/2026_2027/BudTrophy2026/SEG011.htm"
+      ],
+      "level": "Junior",
+      "verified": true
+    },
+    {
+      "id": "volvo-open-cup-2026",
+      "season": "2026/27",
+      "name": "Volvo Open Cup 59th 2026",
+      "short": "Volvo Open Cup 2026",
+      "city": "Riga",
+      "country": "LAT",
+      "start": "2026-11-04",
+      "end": "2026-11-08",
+      "type": "International",
+      "place": 1,
+      "participants": 6,
+      "total": 147.62,
+      "segments": [
+        {
+          "name": "Rhythm Dance",
+          "place": 1,
+          "score": 58.19,
+          "tes": 33.13,
+          "pcs": 25.06,
+          "deductions": 0.0
+        },
+        {
+          "name": "Free Dance",
+          "place": 1,
+          "score": 89.43,
+          "tes": 49.09,
+          "pcs": 40.34,
+          "deductions": 0.0
+        }
+      ],
+      "notes": "Won. Their highest total, RD and FD scores so far. 6 couples classified; 1 more withdrew. The event dates are 04.-08.11.2026. The schedule on the results page shows the junior dance on '04.10.2026' and '05.10.2026', which is almost certainly a typo for 04./05.11.2026. The event was still running on 2026-11-07, but junior ice dance was already finished.",
+      "sources": [
+        "https://results.kristalice.lv/volc592026/index.htm",
+        "https://results.kristalice.lv/volc592026/CAT006RS.htm",
+        "https://results.kristalice.lv/volc592026/SEG011.htm",
+        "https://results.kristalice.lv/volc592026/SEG012.htm",
+        "https://fsresults.info/events/volvo-open-cup-59th-2026/junior-ice-dance"
+      ],
+      "level": "Junior",
+      "verified": true
+    }
+  ]
+};
