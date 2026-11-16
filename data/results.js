@@ -54,8 +54,8 @@ window.SKATE_DATA = {
       "laurin_wied137"
     ]
   },
-  "updated": "2026-11-07",
-  "scope_notes": "Covers seasons 2024/25 to 2026/27 (up to 2026-11-07). Left out because they are 2023/24 events: Bosphorus Cup 2023 (8th), Swiss Championships 2024 in Küsnacht, held Dec 2023 (2nd, 131.50), Ephesus Cup 2024 in Izmir, held Jan 2024 (6th, 134.27), Aarauer Cup 2024 and Coupe Erguel 2023. The list of events was cross-checked against the ISU bio competition list and the fsresults.info couple page.",
+  "updated": "2026-11-16",
+  "scope_notes": "Covers seasons 2024/25 to 2026/27 (up to 2026-11-16). Left out because they are 2023/24 events: Bosphorus Cup 2023 (8th), Swiss Championships 2024 in Küsnacht, held Dec 2023 (2nd, 131.50), Ephesus Cup 2024 in Izmir, held Jan 2024 (6th, 134.27), Aarauer Cup 2024 and Coupe Erguel 2023. The list of events was cross-checked against the ISU bio competition list and the fsresults.info couple page.",
   "competitions": [
     {
       "id": "jgp-czech-skate-2024",
@@ -935,7 +935,15 @@ window.SKATE_DATA = {
         "https://fsresults.info/events/volvo-open-cup-59th-2026/junior-ice-dance"
       ],
       "level": "Junior",
-      "verified": true
+      "verified": true,
+      "instagram": [
+        {
+          "url": "https://www.instagram.com/p/Dffv7TToXLH/",
+          "account": "seraina_laurin_icedance",
+          "date": "2026-11-08",
+          "caption": "We are incredibly happy to take home the gold in Riga and achieve a new Personal Best (147.62)! 🥇✨"
+        }
+      ]
     }
   ]
 };
